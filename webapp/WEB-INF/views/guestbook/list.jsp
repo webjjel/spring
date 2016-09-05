@@ -40,7 +40,7 @@
 									<td>[${count - status.index }]</td>
 									<td>${vo.name }</td>
 									<td>${vo.regDate }</td>
-									<td><a href="guestbook?a=deleteform&no=${vo.no }">삭제</a></td>
+									<td><a href="${pageContext.request.contextPath }/guestbook/deleteform?no=${vo.no }">삭제</a></td>
 								</tr>
 								<tr>
 									<td colspan=4>${vo.message }</td>
@@ -53,11 +53,7 @@
 			</div>
 		</div>
 		<div id="navigation">
-			<ul>
-				<li><a href="">안대혁</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
+			<c:import url="/WEB-INF/views/include/navigation.jsp" />
 		</div>
 		<div id="footer">
 			<p>(c)opyright 2014 </p>
