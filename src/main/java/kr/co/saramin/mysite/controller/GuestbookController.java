@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.saramin.mysite.service.GuestbookService;
 import kr.co.saramin.mysite.vo.GuestbookVo;
-import kr.co.saramin.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/guestbook")
@@ -29,7 +28,7 @@ public class GuestbookController {
 	}
 	
 	@RequestMapping("/deleteform")
-	public String deleteform(Model model, @RequestParam("no") int no) {
+	public String deleteform(Model model, @RequestParam("no") Long no) {
 		model.addAttribute("no", no);
 		
 		return "/WEB-INF/views/guestbook/deleteform.jsp";
