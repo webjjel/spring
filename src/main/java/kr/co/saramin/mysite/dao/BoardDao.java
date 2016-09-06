@@ -172,7 +172,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			String sql = "SELECT no, title, content, view_count, DATE_FORMAT(reg_date, '%Y-%m-%d %p %h:%i:%s'), user_no from board ORDER BY reg_date desc";
+			String sql = "SELECT no, title, content, view_count, DATE_FORMAT(reg_date, '%Y-%m-%d %p %h:%i:%s'), user_no FROM board ORDER BY reg_date desc";
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				BoardVo vo = new BoardVo();
@@ -194,6 +194,51 @@ public class BoardDao {
 				}
 				if (stmt != null) {
 					stmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+	
+	public List<BoardVo> getList(String kwd) {
+		List<BoardVo> list = new ArrayList<BoardVo>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnection();
+			
+			String sql = "SELECT no, title, content, view_count, DATE_FORMAT(reg_date, '%Y-%m-%d %p %h:%i:%s'), user_no FROM board WHERE title LIKE ? ORDER BY reg_date desc";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, "%" + kwd + "%");
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				BoardVo vo = new BoardVo();
+				vo.setNo(rs.getLong(1));
+				vo.setTitle(rs.getString(2));
+				vo.setContent(rs.getString(3));
+				vo.setViewCount(rs.getInt(4));
+				vo.setRegDate(rs.getString(5));
+				vo.setUserNo(rs.getLong(6));
+
+				list.add(vo);
+			}
+		} catch (SQLException ex) {
+			System.out.println("error: " + ex);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
 				}
 				if (conn != null) {
 					conn.close();

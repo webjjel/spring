@@ -13,7 +13,10 @@ public class BoardService {
 	@Autowired
 	private BoardDao boardDao;
 	
-	public List<BoardVo> getList() {
+	public List<BoardVo> getList(String kwd) {
+		if (kwd != null) {
+			return boardDao.getList(kwd);
+		}
 		return boardDao.getList();
 	}
 	

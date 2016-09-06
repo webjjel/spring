@@ -20,9 +20,10 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping("/list")
-	public String list(Model model) {
-		List<BoardVo> list = boardService.getList();
+	public String list(Model model, @RequestParam(value="kwd", required=false) String kwd) {
+		List<BoardVo> list = boardService.getList(kwd);
 		
+		model.addAttribute("kwd", kwd);
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/board/list.jsp";
