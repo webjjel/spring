@@ -18,4 +18,8 @@ public class UserService {
 	public UserVo login(UserVo userVo) {
 		return userDao.get(userVo);
 	}
+	
+	public void modifyUser(UserVo userVo) {
+		userDao.update(userVo);
+	}
 }

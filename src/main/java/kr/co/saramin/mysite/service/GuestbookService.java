@@ -17,6 +17,10 @@ public class GuestbookService {
 		return guestbookDao.getList();
 	}
 	
+	public void insert(GuestbookVo guestbookVo) {
+		guestbookDao.insert(guestbookVo);
+	}
+	
 	public void delete(GuestbookVo guestbookVo) {
 		guestbookDao.delete(guestbookVo);
 	}

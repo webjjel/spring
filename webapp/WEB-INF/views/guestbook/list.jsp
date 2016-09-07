@@ -16,15 +16,14 @@
 		</div>
 		<div id="content">
 			<div id="guestbook">
-				<form action="/mysite/guestbook" method="post">
-					<input type="hidden" name="a" value="insert">
+				<form method="post" action="${pageContext.request.contextPath }/guestbook/insert">
 					<table>
 						<tr>
 							<td>이름</td><td><input type="text" name="name"></td>
-							<td>비밀번호</td><td><input type="password" name="pass"></td>
+							<td>비밀번호</td><td><input type="password" name="password"></td>
 						</tr>
 						<tr>
-							<td colspan=4><textarea name="content" id="content"></textarea></td>
+							<td colspan=4><textarea name="message" id="content"></textarea></td>
 						</tr>
 						<tr>
 							<td colspan=4 align=right><input type="submit" VALUE=" 확인 "></td>
@@ -40,7 +39,7 @@
 									<td>[${count - status.index }]</td>
 									<td>${vo.name }</td>
 									<td>${vo.regDate }</td>
-									<td><a href="${pageContext.request.contextPath }/guestbook/deleteform?no=${vo.no }">삭제</a></td>
+									<td><a href="${pageContext.request.contextPath }/guestbook/deleteform/${vo.no }">삭제</a></td>
 								</tr>
 								<tr>
 									<td colspan=4>${vo.message }</td>

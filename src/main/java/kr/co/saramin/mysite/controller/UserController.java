@@ -17,9 +17,26 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@RequestMapping("/update")
+	public String update(HttpSession session) {
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if (authUser == null) {
+			return "redirect:/index";
+		}
+		
+		UserVo userVo = new UserVo();
+		userVo.setNo(authUser.getNo());
+		userVo.setName("업데이트");
+		userVo.setPassword("12345");
+		userVo.setGender("FEMALE");
+		
+		userService.modifyUser(userVo);
+		return "redirect:/index";
+	}
+	
 	@RequestMapping("/joinform")
 	public String joinform() {
-		return "/WEB-INF/views/user/joinform.jsp";
+		return "user/joinform";
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
@@ -28,9 +45,19 @@ public class UserController {
 		return "redirect:/user/loginform";
 	}
 	
+	@RequestMapping("/modifyform")
+	public String modifyform() {
+		return "";
+	}
+	
+	@RequestMapping("/modify")
+	public String modify() {
+		return "";
+	}
+	
 	@RequestMapping("/loginform")
 	public String loginform() {
-		return "/WEB-INF/views/user/loginform.jsp";
+		return "user/loginform";
 	}
 	
 	@RequestMapping("/login")

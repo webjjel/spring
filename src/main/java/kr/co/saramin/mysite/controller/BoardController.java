@@ -19,14 +19,14 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@RequestMapping("/list")
+	@RequestMapping("")
 	public String list(Model model, @RequestParam(value="kwd", required=false) String kwd) {
 		List<BoardVo> list = boardService.getList(kwd);
 		
 		model.addAttribute("kwd", kwd);
 		model.addAttribute("list", list);
 		
-		return "/WEB-INF/views/board/list.jsp";
+		return "board/list";
 	}
 	
 	@RequestMapping("/view")
@@ -35,7 +35,7 @@ public class BoardController {
 		model.addAttribute("no", no);
 		model.addAttribute("title", vo.getTitle());
 		model.addAttribute("content", vo.getContent());
-		return "/WEB-INF/views/board/view.jsp";
+		return "board/view";
 	}
 	
 	@RequestMapping("/modifyform")
@@ -44,18 +44,18 @@ public class BoardController {
 		model.addAttribute("no", no);
 		model.addAttribute("title", vo.getTitle());
 		model.addAttribute("content", vo.getContent());
-		return "/WEB-INF/views/board/modify.jsp";
+		return "board/modify";
 	}
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public String modify(@ModelAttribute BoardVo boardVo) {
 		boardService.modify(boardVo);
-		return "redirect:/board/list";
+		return "redirect:/board";
 	}
 	
 	@RequestMapping("/writeform")
 	public String writeform() {
-		return "/WEB-INF/views/board/write.jsp";
+		return "board/write";
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
@@ -63,12 +63,12 @@ public class BoardController {
 		// 임시 데이터
 		boardVo.setUserNo((long) 1);
 		boardService.write(boardVo);
-		return "redirect:/board/list";
+		return "redirect:/board";
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(@ModelAttribute BoardVo boardVo) {
 		boardService.delete(boardVo);
-		return "redirect:/board/list";
+		return "redirect:/board";
 	}
 }
