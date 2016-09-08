@@ -7,7 +7,7 @@
 <ul>
 	<c:choose>
 		<c:when test="${not empty authUser }">
-			<li><a href="">회원정보수정</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/updateform">회원정보수정</a></li>
 			<li><a href="/mysite3/user/logout">로그아웃</a></li>
 			<li>${authUser.name }님 안녕하세요 ^^;</li>
 		</c:when>

@@ -1,7 +1,5 @@
 package kr.co.saramin.mysite.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,29 +21,18 @@ public class UserController {
 	@Auth
 	@RequestMapping("/updateform")
 	public String updateform(@AuthUser UserVo authUser, Model model) {
-		
-		System.out.println(authUser);
-//		UserVo userVo = userService.getUser();
-//		model.addAttribute("userVo", userVo);
+		UserVo userVo = userService.getUser(authUser.getNo());
+		model.addAttribute("userVo", userVo);
 		return "user/updateform";
 	}
 	
 	@Auth
 	@RequestMapping("/update")
-	public String update(HttpSession session) {
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if (authUser == null) {
-			return "redirect:/index";
-		}
-		
-		UserVo userVo = new UserVo();
+	public String update(@AuthUser UserVo authUser, @ModelAttribute UserVo userVo) {
 		userVo.setNo(authUser.getNo());
-		userVo.setName("업데이트");
-		userVo.setPassword("12345");
-		userVo.setGender("FEMALE");
-		
 		userService.modifyUser(userVo);
-		return "redirect:/index";
+		
+		return "redirect:/user/updateform";
 	}
 	
 	@RequestMapping("/joinform")

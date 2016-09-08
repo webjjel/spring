@@ -7,7 +7,7 @@
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="<%=request.getContextPath() %>/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/user.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -17,23 +17,31 @@
 		<div id="content">
 			<div id="user">
 
-				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join">
+				<form id="update-form" name="updateForm" method="post" action="${pageContext.request.contextPath}/user/update">
 					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="">
+					<input id="name" name="name" type="text" value="${userVo.name}">
 
 					<label class="block-label" for="email">이메일</label>
-					
+					<h5>${userVo.email}</h5>
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
 					
 					<fieldset>
 						<legend>성별</legend>
-						<label>여</label> <input type="radio" name="gender" value="FEMALE" checked="checked">
-						<label>남</label> <input type="radio" name="gender" value="MALE">
+						<c:choose>
+							<c:when test="${userVo.gender == 'FEMALE'}">
+								<label>여</label> <input type="radio" name="gender" value="FEMALE" checked="checked">
+								<label>남</label> <input type="radio" name="gender" value="MALE">
+							</c:when>
+							<c:otherwise>
+								<label>여</label> <input type="radio" name="gender" value="FEMALE">
+								<label>남</label> <input type="radio" name="gender" value="MALE" checked="checked">							
+							</c:otherwise>
+						</c:choose>
 					</fieldset>
 					
-					<input type="submit" value="수정">
+					<input type="submit" value="수정하기">
 					
 				</form>
 			</div>
