@@ -11,6 +11,10 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	public UserVo getUser(String email) {
+		return userDao.get(email);
+	}
+	
 	public void join(UserVo userVo) {
 		userDao.insert(userVo);
 	}

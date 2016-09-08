@@ -27,6 +27,11 @@ public class GuestbookController {
 		return "guestbook/list";
 	}
 	
+	@RequestMapping("/ajax")
+	public String ajax() {
+		return "guestbook/ajax";
+	}
+	
 	@RequestMapping("/insert")
 	public String insert(@ModelAttribute GuestbookVo guestbookVo) {
 		guestbookService.insert(guestbookVo);
