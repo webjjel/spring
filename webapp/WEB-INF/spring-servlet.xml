@@ -36,7 +36,7 @@
 
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler />
-	
+
 	<!-- the mvc resources tag does the magic -->
 	<mvc:resources mapping="/upload-images/**" location="file:/upload/" />
 
@@ -83,4 +83,14 @@
 			<bean class="kr.co.saramin.security.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+
+	<!-- MessageSource -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages_ko</value>
+			</list>
+		</property>
+	</bean>
 </beans>
