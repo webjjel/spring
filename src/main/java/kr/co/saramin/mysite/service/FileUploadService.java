@@ -11,7 +11,8 @@ import kr.co.saramin.mysite.exception.FileUploadServiceException;
 
 @Service
 public class FileUploadService {
-	
+
+//	@Transactional
 	public String saveFile(MultipartFile multipartFile) {
 		if (multipartFile.isEmpty()) {
 			throw new FileUploadServiceException("Upload File Empty");
